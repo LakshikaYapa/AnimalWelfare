@@ -1,11 +1,27 @@
 import React from 'react';
-import { HeartHandshake } from 'lucide-react';
+import { HeartHandshake, PawPrint, Utensils } from 'lucide-react';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-sky-400 via-teal-300 to-emerald-400 flex items-center justify-center p-4">
+    <div className="relative min-h-screen bg-gradient-to-r from-sky-400 via-teal-300 to-emerald-400 flex items-center justify-center p-4 overflow-hidden">
+      
+      {/* Background Watermarks */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+        {/* Top-Left Paw Prints */}
+        <PawPrint className="absolute top-8 left-10 text-white/20 -rotate-12" size={90} />
+        <PawPrint className="absolute top-36 left-48 text-white/15 rotate-12" size={70} />
+
+        {/* Top-Right Paw Prints */}
+        <PawPrint className="absolute top-12 right-20 text-white/20 rotate-45" size={100} />
+        <PawPrint className="absolute top-44 right-60 text-white/15 -rotate-12" size={65} />
+
+        {/* Bottom-Right Paw Prints */}
+        <PawPrint className="absolute bottom-12 right-16 text-white/20 -rotate-45" size={110} />
+        <PawPrint className="absolute bottom-40 right-48 text-white/15 rotate-12" size={70} />
+      </div>
+
       {/* Main Container Card */}
-      <div className="w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 min-h-[450px]">
+      <div className="relative z-10 w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 min-h-[450px]">
         
         {/* Left Side: Staff Section */}
         <div className="bg-white p-8 md:p-12 flex flex-col items-center justify-center text-center">
