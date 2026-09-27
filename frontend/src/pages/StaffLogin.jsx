@@ -5,8 +5,15 @@ function StaffLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     staffId: '',
-    password: ''
+    password: '',
+    rememberMe: false
   });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Staff Login Data:", formData);
+    // Yaluwagew backend API eka ready unama api meka connect karamu
+  };
 
   return (
     <div className="relative min-h-screen bg-gradient-to-r from-sky-400 via-teal-300 to-emerald-400 flex items-center justify-center p-4 overflow-hidden">
@@ -31,8 +38,8 @@ function StaffLogin() {
           STAFF LOGIN
         </h2>
 
-        {/* Inputs Section */}
-        <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+        {/* Form Inputs & Options */}
+        <form onSubmit={handleSubmit} className="space-y-4">
           
           {/* Staff ID / Official Email Input */}
           <div className="relative flex items-center">
@@ -43,10 +50,11 @@ function StaffLogin() {
               value={formData.staffId}
               onChange={(e) => setFormData({...formData, staffId: e.target.value})}
               className="w-full bg-white/80 border border-sky-200 focus:border-sky-500 rounded-full py-3 pl-12 pr-4 text-sm text-gray-800 placeholder-gray-400 outline-none transition shadow-sm"
+              required
             />
           </div>
 
-          {/* Password Input with Show/Hide Eye Toggle */}
+          {/* Password Input */}
           <div className="relative flex items-center">
             <Lock className="absolute left-4 text-sky-600" size={20} />
             <input 
@@ -55,6 +63,7 @@ function StaffLogin() {
               value={formData.password}
               onChange={(e) => setFormData({...formData, password: e.target.value})}
               className="w-full bg-white/80 border border-sky-200 focus:border-sky-500 rounded-full py-3 pl-12 pr-12 text-sm text-gray-800 placeholder-gray-400 outline-none transition shadow-sm"
+              required
             />
             <button 
               type="button" 
@@ -65,7 +74,41 @@ function StaffLogin() {
             </button>
           </div>
 
+          {/* Remember Me Checkbox */}
+          <div className="flex items-center justify-start px-2 text-xs font-semibold text-gray-700">
+            <label className="flex items-center gap-2 cursor-pointer select-none">
+              <input 
+                type="checkbox" 
+                checked={formData.rememberMe}
+                onChange={(e) => setFormData({...formData, rememberMe: e.target.checked})}
+                className="rounded border-gray-300 text-sky-600 focus:ring-sky-500 h-4 w-4 cursor-pointer"
+              />
+              <span>REMEMBER ME</span>
+            </label>
+          </div>
+
+          {/* Log In Button */}
+          <button 
+            type="submit"
+            className="w-full bg-[#274c77] hover:bg-[#1b365d] text-white font-bold py-3.5 rounded-full uppercase tracking-wider shadow-md transition duration-200 cursor-pointer mt-2"
+          >
+            LOG IN
+          </button>
         </form>
+
+        {/* Forgot Password Link */}
+        <div className="mt-3">
+          <a href="#" className="text-xs text-sky-600 hover:underline font-medium">
+            Forgot password?
+          </a>
+        </div>
+
+        {/* Create Staff Account Link */}
+        <div className="mt-6 pt-4 border-t border-sky-200/60">
+          <a href="#" className="text-sm font-bold text-gray-800 hover:text-sky-700 uppercase underline tracking-wide">
+            CREATE STAFF ACCOUNT
+          </a>
+        </div>
 
       </div>
 
