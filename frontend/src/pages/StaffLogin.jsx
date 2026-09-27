@@ -1,7 +1,13 @@
-import React from 'react';
-import { UserCheck, PawPrint } from 'lucide-react';
+import React, { useState } from 'react';
+import { UserCheck, PawPrint, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 
 function StaffLogin() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    staffId: '',
+    password: ''
+  });
+
   return (
     <div className="relative min-h-screen bg-gradient-to-r from-sky-400 via-teal-300 to-emerald-400 flex items-center justify-center p-4 overflow-hidden">
       
@@ -25,12 +31,41 @@ function StaffLogin() {
           STAFF LOGIN
         </h2>
 
-        {/* Form Inputs Placeholder */}
-        <div className="p-4 bg-white/50 rounded-2xl border border-sky-100">
-          <p className="text-xs text-gray-500 font-medium">
-            
-          </p>
-        </div>
+        {/* Inputs Section */}
+        <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
+          
+          {/* Staff ID / Official Email Input */}
+          <div className="relative flex items-center">
+            <Mail className="absolute left-4 text-sky-600" size={20} />
+            <input 
+              type="text" 
+              placeholder="Staff ID / Official Email"
+              value={formData.staffId}
+              onChange={(e) => setFormData({...formData, staffId: e.target.value})}
+              className="w-full bg-white/80 border border-sky-200 focus:border-sky-500 rounded-full py-3 pl-12 pr-4 text-sm text-gray-800 placeholder-gray-400 outline-none transition shadow-sm"
+            />
+          </div>
+
+          {/* Password Input with Show/Hide Eye Toggle */}
+          <div className="relative flex items-center">
+            <Lock className="absolute left-4 text-sky-600" size={20} />
+            <input 
+              type={showPassword ? "text" : "password"} 
+              placeholder="Password"
+              value={formData.password}
+              onChange={(e) => setFormData({...formData, password: e.target.value})}
+              className="w-full bg-white/80 border border-sky-200 focus:border-sky-500 rounded-full py-3 pl-12 pr-12 text-sm text-gray-800 placeholder-gray-400 outline-none transition shadow-sm"
+            />
+            <button 
+              type="button" 
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-4 text-gray-400 hover:text-sky-600 cursor-pointer"
+            >
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            </button>
+          </div>
+
+        </form>
 
       </div>
 
