@@ -2,14 +2,21 @@ import React from 'react';
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4">
-      <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-200 text-center max-w-md w-full">
-        <h1 className="text-3xl font-bold text-teal-600 mb-2">
-          Hello!
-        </h1>
-        <p className="text-xl font-semibold text-slate-800">
-          Welcome to Welfare Community
-        </p>
+    // Full screen background with blue-to-teal gradient
+    <div className="min-h-screen bg-gradient-to-r from-sky-400 via-teal-300 to-emerald-400 flex items-center justify-center p-4">
+      {/* Main Container Card */}
+      <div className="w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 min-h-[450px]">
+        
+        {/* Left Side (Staff Section) Placeholder */}
+        <div className="bg-white p-8 flex flex-col items-center justify-center text-center">
+          <p className="text-gray-400 font-medium">Staff Section (Coming Next)</p>
+        </div>
+
+        {/* Right Side (Guest Section) Placeholder */}
+        <div className="bg-emerald-50/60 p-8 flex flex-col items-center justify-center text-center">
+          <p className="text-gray-400 font-medium">Guest Section (Coming Next)</p>
+        </div>
+
       </div>
     </div>
   );
