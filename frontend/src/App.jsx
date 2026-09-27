@@ -1,4 +1,5 @@
 import React from 'react';
+import { HeartHandshake } from 'lucide-react';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
             ARE YOU A STAFF MEMBER OR A COMMUNITY GUEST?
           </p>
 
-          <button className="w-full max-w-xs bg-[#3b82f6] hover:bg-[#2563eb] text-white font-bold tracking-wider py-3 px-6 rounded-full uppercase shadow-md transition duration-200 mb-4">
+          <button className="w-full max-w-xs bg-[#3a82b8] hover:bg-[#2b6a97] text-white font-bold tracking-wider py-3.5 px-6 rounded-full uppercase shadow-md transition duration-200 mb-4 cursor-pointer">
             I AM STAFF
           </button>
 
@@ -25,9 +26,25 @@ function App() {
           </p>
         </div>
 
-        {/* Right Side: Guest Section (Placeholder) */}
-        <div className="bg-[#e8f5f1] p-8 md:p-12 flex flex-col items-center justify-center text-center border-t md:border-t-0 md:border-l border-gray-100">
-          <p className="text-gray-400 font-medium">Guest Section (Coming Next)</p>
+        {/* Right Side: Guest Section */}
+        <div className="bg-[#e2f3ec] p-8 md:p-12 flex flex-col items-center justify-center text-center border-t md:border-t-0 md:border-l border-emerald-100">
+          
+          {/* Illustration Icon */}
+          <div className="mb-4 text-emerald-800 bg-emerald-100/60 p-4 rounded-full">
+            <HeartHandshake size={56} strokeWidth={1.5} />
+          </div>
+
+          <p className="text-sm font-semibold text-gray-700 mb-8">
+            Help feed clearum-hclns
+          </p>
+
+          <button className="w-full max-w-xs bg-[#3a82b8] hover:bg-[#2b6a97] text-white font-bold tracking-wider py-3.5 px-6 rounded-full uppercase shadow-md transition duration-200 mb-4 cursor-pointer">
+            I AM GUEST
+          </button>
+
+          <p className="text-xs text-gray-500 font-medium">
+            As Guest to adopt, volunteer, or support.
+          </p>
         </div>
 
       </div>
