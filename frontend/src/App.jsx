@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import StaffLogin from './pages/StaffLogin';
 import { HeartHandshake, PawPrint, Utensils } from 'lucide-react';
-
+import StaffRegister from "./pages/StaffRegister";
 function Gatekeeper() {
   const navigate = useNavigate();
 
@@ -70,6 +70,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Gatekeeper />} />
         <Route path="/staff-login" element={<StaffLogin />} />
+        <Route path="/staff-register" element={<StaffRegister />} />
       </Routes>
     </Router>
   );

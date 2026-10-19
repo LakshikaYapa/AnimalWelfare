@@ -201,9 +201,22 @@ function StaffLogin() {
           </p>
         </form>
 
-        <p className="mt-5 text-center text-xs text-gray-500">
-          Authorised staff access only.
-        </p>
+        <div className="mt-6 border-t border-sky-200 pt-5 text-center">
+  <p className="text-sm text-gray-600">
+    Need a staff account?
+  </p>
+
+  <Link
+    to="/staff-register"
+    className="mt-2 inline-block rounded text-sm font-bold text-sky-800 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-700"
+  >
+    Request Staff Account
+  </Link>
+</div>
+
+<p className="mt-5 text-center text-xs text-gray-500">
+  Authorised staff access only.
+</p>
       </section>
     </main>
   );
