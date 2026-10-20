@@ -1,118 +1,224 @@
-import React, { useState } from 'react';
-import { UserCheck, PawPrint, Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  UserCheck,
+  PawPrint,
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  ArrowLeft,
+} from "lucide-react";
 
 function StaffLogin() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    staffId: '',
-    password: '',
-    rememberMe: false
-  });
+  // Input fields වල values තබාගන්නවා.
+  const [staffId, setStaffId] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Staff Login Data:", formData);
-    // Yaluwagew backend API eka ready unama api meka connect karamu
-  };
+  // Password show / hide කිරීම.
+  const [showPassword, setShowPassword] = useState(false);
+
+  // Userට message එකක් පෙන්වන්න.
+  const [message, setMessage] = useState("");
+
+  function handleSubmit(event) {
+    // Submit කරන විට page refresh වීම නවත්වනවා.
+    event.preventDefault();
+
+    setMessage("");
+
+    if (!staffId.trim()) {
+      setMessage("Please enter your Staff ID or official email.");
+      return;
+    }
+
+    if (!password) {
+      setMessage("Please enter your password.");
+      return;
+    }
+
+    // Backend එක connect කළාම login request එක මෙතැනට දානවා.
+    setMessage(
+      "The login form is ready. Backend connection is required to sign in."
+    );
+  }
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-r from-sky-400 via-teal-300 to-emerald-400 flex items-center justify-center p-4 overflow-hidden">
-      
-      {/* Background Watermarks */}
-      <div className="absolute inset-0 pointer-events-none select-none">
-        <PawPrint className="absolute top-10 left-12 text-white/20 -rotate-12" size={80} />
-        <PawPrint className="absolute top-1/4 right-16 text-white/20 rotate-45" size={100} />
-        <PawPrint className="absolute bottom-16 right-10 text-white/20 -rotate-12" size={90} />
+    <main className="relative min-h-screen overflow-hidden bg-gradient-to-r from-sky-400 via-teal-300 to-emerald-400 px-4 py-16 flex items-center justify-center">
+      {/* Background decorations */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 select-none"
+      >
+        <PawPrint
+          size={90}
+          className="absolute top-10 left-8 -rotate-12 text-white/20"
+        />
+
+        <PawPrint
+          size={65}
+          className="absolute top-40 left-1/4 rotate-12 text-white/15"
+        />
+
+        <PawPrint
+          size={100}
+          className="absolute top-16 right-12 rotate-45 text-white/20"
+        />
+
+        <PawPrint
+          size={75}
+          className="absolute bottom-16 left-12 rotate-12 text-white/20"
+        />
+
+        <PawPrint
+          size={110}
+          className="absolute bottom-10 right-12 -rotate-12 text-white/20"
+        />
       </div>
 
-      {/* Main Login Card */}
-      <div className="relative z-10 w-full max-w-md bg-[#eef7f6] rounded-3xl shadow-2xl p-8 pt-14 text-center border border-white/50">
-        
-        {/* Top Avatar Icon / Badge */}
-        <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-white p-3 rounded-full shadow-lg border-4 border-sky-100 text-sky-600">
-          <UserCheck size={48} strokeWidth={2} />
+      {/* Login card */}
+      <section className="relative z-10 w-full max-w-md rounded-3xl border border-white/60 bg-[#eef7f6] px-6 pb-8 pt-14 shadow-2xl sm:px-9">
+        {/* Staff icon */}
+        <div className="absolute -top-10 left-1/2 -translate-x-1/2 rounded-full border-4 border-sky-100 bg-white p-3 text-sky-600 shadow-lg">
+          <UserCheck size={44} strokeWidth={1.8} />
         </div>
 
-        {/* Title */}
-        <h2 className="text-2xl font-extrabold text-gray-900 uppercase tracking-wide mb-6">
-          STAFF LOGIN
-        </h2>
+        {/* Back link */}
+        <Link
+          to="/"
+          className="mb-6 inline-flex items-center gap-2 rounded text-sm font-medium text-sky-800 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-700"
+        >
+          <ArrowLeft size={16} />
+          Back
+        </Link>
 
-        {/* Form Inputs & Options */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          
-          {/* Staff ID / Official Email Input */}
-          <div className="relative flex items-center">
-            <Mail className="absolute left-4 text-sky-600" size={20} />
-            <input 
-              type="text" 
-              placeholder="Staff ID / Official Email"
-              value={formData.staffId}
-              onChange={(e) => setFormData({...formData, staffId: e.target.value})}
-              className="w-full bg-white/80 border border-sky-200 focus:border-sky-500 rounded-full py-3 pl-12 pr-4 text-sm text-gray-800 placeholder-gray-400 outline-none transition shadow-sm"
-              required
-            />
-          </div>
+        <h1 className="text-center text-2xl font-extrabold uppercase tracking-wide text-gray-900">
+          Staff Login
+        </h1>
 
-          {/* Password Input */}
-          <div className="relative flex items-center">
-            <Lock className="absolute left-4 text-sky-600" size={20} />
-            <input 
-              type={showPassword ? "text" : "password"} 
-              placeholder="Password"
-              value={formData.password}
-              onChange={(e) => setFormData({...formData, password: e.target.value})}
-              className="w-full bg-white/80 border border-sky-200 focus:border-sky-500 rounded-full py-3 pl-12 pr-12 text-sm text-gray-800 placeholder-gray-400 outline-none transition shadow-sm"
-              required
-            />
-            <button 
-              type="button" 
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 text-gray-400 hover:text-sky-600 cursor-pointer"
+        <p className="mt-2 mb-7 text-center text-sm text-gray-600">
+          Welcome back! Sign in to manage dog welfare and care.
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Staff ID / email */}
+          <div>
+            <label
+              htmlFor="staffId"
+              className="mb-2 block text-sm font-semibold text-gray-700"
             >
-              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
-          </div>
-
-          {/* Remember Me Checkbox */}
-          <div className="flex items-center justify-start px-2 text-xs font-semibold text-gray-700">
-            <label className="flex items-center gap-2 cursor-pointer select-none">
-              <input 
-                type="checkbox" 
-                checked={formData.rememberMe}
-                onChange={(e) => setFormData({...formData, rememberMe: e.target.checked})}
-                className="rounded border-gray-300 text-sky-600 focus:ring-sky-500 h-4 w-4 cursor-pointer"
-              />
-              <span>REMEMBER ME</span>
+              Staff ID / Official Email
             </label>
+
+            <div className="relative">
+              <Mail
+                aria-hidden="true"
+                size={20}
+                className="absolute top-3.5 left-4 text-sky-600"
+              />
+
+              <input
+                id="staffId"
+                name="staffId"
+                type="text"
+                autoComplete="username"
+                placeholder="Enter your Staff ID or email"
+                value={staffId}
+                onChange={(event) => {
+                  setStaffId(event.target.value);
+                  setMessage("");
+                }}
+                required
+                className="w-full rounded-full border border-sky-200 bg-white py-3 pr-4 pl-12 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-sky-600 focus:ring-2 focus:ring-sky-200"
+              />
+            </div>
           </div>
 
-          {/* Log In Button */}
-          <button 
+          {/* Password */}
+          <div>
+            <label
+              htmlFor="password"
+              className="mb-2 block text-sm font-semibold text-gray-700"
+            >
+              Password
+            </label>
+
+            <div className="relative">
+              <Lock
+                aria-hidden="true"
+                size={20}
+                className="absolute top-3.5 left-4 text-sky-600"
+              />
+
+              <input
+                id="password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                  setMessage("");
+                }}
+                required
+                className="w-full rounded-full border border-sky-200 bg-white py-3 pr-12 pl-12 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-sky-600 focus:ring-2 focus:ring-sky-200"
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                aria-label={
+                  showPassword ? "Hide password" : "Show password"
+                }
+                aria-pressed={showPassword}
+                className="absolute top-3 right-4 rounded p-0.5 text-gray-500 hover:text-sky-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700"
+              >
+                {showPassword ? (
+                  <EyeOff size={20} />
+                ) : (
+                  <Eye size={20} />
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Login button */}
+          <button
             type="submit"
-            className="w-full bg-[#274c77] hover:bg-[#1b365d] text-white font-bold py-3.5 rounded-full uppercase tracking-wider shadow-md transition duration-200 cursor-pointer mt-2"
+            className="w-full cursor-pointer rounded-full bg-[#274c77] px-6 py-3.5 font-bold uppercase tracking-wider text-white shadow-md transition hover:bg-[#1b365d] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-700"
           >
-            LOG IN
+            Log In
           </button>
+
+          {/* Form feedback */}
+          <p
+            role="status"
+            aria-live="polite"
+            className="text-center text-sm leading-relaxed text-sky-900"
+          >
+            {message}
+          </p>
         </form>
 
-        {/* Forgot Password Link */}
-        <div className="mt-3">
-          <a href="#" className="text-xs text-sky-600 hover:underline font-medium">
-            Forgot password?
-          </a>
-        </div>
+        <div className="mt-6 border-t border-sky-200 pt-5 text-center">
+  <p className="text-sm text-gray-600">
+    Need a staff account?
+  </p>
 
-        {/* Create Staff Account Link */}
-        <div className="mt-6 pt-4 border-t border-sky-200/60">
-          <a href="#" className="text-sm font-bold text-gray-800 hover:text-sky-700 uppercase underline tracking-wide">
-            CREATE STAFF ACCOUNT
-          </a>
-        </div>
+  <Link
+    to="/staff-register"
+    className="mt-2 inline-block rounded text-sm font-bold text-sky-800 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-700"
+  >
+    Request Staff Account
+  </Link>
+</div>
 
-      </div>
-
-    </div>
+<p className="mt-5 text-center text-xs text-gray-500">
+  Authorised staff access only.
+</p>
+      </section>
+    </main>
   );
 }
 
